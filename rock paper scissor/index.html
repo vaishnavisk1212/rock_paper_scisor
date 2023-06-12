@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #9DB2BF;
+        }
+        
+        .container {}
+        
+        img {
+            height: 300px;
+            width: 300px;
+            padding: 30px;
+            border-radius: 50%;
+            border: 6px solid black;
+        }
+        
+        .main {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <p>Make your move:</p>
+    <div class="main">
+        <div class="container">
+            <img src="rock.webp" onclick="play('rock')">
+        </div>
+        <div class="container">
+            <img src="paper.png" onclick="play('rock')">
+        </div>
+        <div class="container">
+            <img src="scissor.png" onclick="play('rock')">
+
+        </div>
+    </div>
+    <!-- <input type="button" onclick="play('rock')">
+    <img="rockpng.png"></input> -->
+    <!-- <button onclick="play('paper')">Paper</button>
+    <button onclick="play('scissors')">Scissors</button> -->
+    <h2>Score</h2>
+    <p>You: <span id="player-score">0</span></p>
+    <p>Computer: <span id="computer-score">0</span></p>
+    <script>
+        // Initialize scores
+        let playerScore = 0;
+        let computerScore = 0;
+
+        // Function to play the game
+        function play(playerMove) {
+            const moves = ['rock', 'paper', 'scissors'];
+            const computerMove = moves[Math.floor(Math.random() * 3)];
+
+            // Determine the winner
+            if (playerMove === computerMove) {
+                alert("It's a tie!");
+            } else if (
+                (playerMove === 'rock' && computerMove === 'scissors') ||
+                (playerMove === 'paper' && computerMove === 'rock') ||
+                (playerMove === 'scissors' && computerMove === 'paper')
+            ) {
+                playerScore++;
+                alert('You win this round!');
+            } else {
+                computerScore++;
+                alert('Computer wins this round!');
+            }
+
+            // Update scores on the page
+            document.getElementById('player-score').textContent = playerScore;
+            document.getElementById('computer-score').textContent = computerScore;
+
+            // Check if a player has reached the winning score
+            const winningScore = 3;
+            if (playerScore === winningScore) {
+                alert('You won the game!');
+                resetGame();
+            } else if (computerScore === winningScore) {
+                alert('Computer won the game!');
+                resetGame();
+            }
+        }
+
+        // Function to reset the game
+        function resetGame() {
+            playerScore = 0;
+            computerScore = 0;
+            document.getElementById('player-score').textContent = playerScore;
+            document.getElementById('computer-score').textContent = computerScore;
+        }
+    </script>
+</body>
+
+</html>
